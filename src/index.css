@@ -1,13 +1,167 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+html {
+  font-size: 16px;
 }
+
+body {
+  min-height: 100vh;
+  font-family: 'Open Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  background-color: #efefef;
+}
+
+#root {
+  flex-grow: 1;
+ 
+  
+}
+
+.Nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #ddd;
+}
+
+.Header {
+  font-size: 1.5rem;
+}
+
+.searchForm {
+  flex-grow: 1;
+  margin-left: 1rem;
+}
+
+.Nav label {
+  display: none;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.Nav ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
+}
+
+.Nav ul li {
+  margin: 0 0.5rem 0.5rem 0;
+}
+
+@media (max-width: 768px) {
+  .Nav {
+    flex-direction: column;
+  }
+
+  .searchForm {
+    margin: 1rem 0;
+  }
+
+  .Nav label {
+    display: none;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+  }
+
+  .Nav ul li {
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+  }
+}
+.Content {
+  padding: 1rem;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  display: flex;
+  flex-direction: row;
+}
+
+.Content img {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  margin-right: 1rem;
+}
+
+.Content .info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1; /* take up remaining space */
+}
+
+.Content .info h2 {
+  margin-top: 0;
+}
+
+.Content .info p {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.Content ul {
+  list-style: disc;
+  padding: 0;
+  margin: 0;
+}
+
+.Content ul li {
+  margin: 0.5rem 0;
+  display: block;
+}
+
+.Content ul li label {
+  display: block;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+.item-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (max-width: 768px) {
+  .Content {
+    padding: 0.5rem;
+    flex-direction: column;
+  }
+
+  .Content img {
+    margin-right: 0;
+    max-width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .Content .info {
+    margin-bottom: 1rem;
+  }
+
+  label {
+    font-size: 0.9rem;
+  }
+  .item-container {
+    flex-direction: column;
+  }
+}
+
+
