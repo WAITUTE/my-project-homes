@@ -1,21 +1,28 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const Content = ({ items }) => {
+const Content = ({ Posts }) => {
   return (
     <main className='Content'>
       <ul>
-        {items.map((item) => (
-          <li key={item.id}>
-            <label>{item.title}</label>
-            <div className='item-container'>
-              <img
-                src={item.image}
-                alt={item.title}
-              />
-              <div className='info'>
-                <p>{item.body}</p>
-              </div>
-            </div>
+        {Posts.map((post) => (
+          <li key={post.id}>
+            <Link to={`/post/${post.id}`}>
+                <label style= {{color: "white"}} >{post.title}</label>
+            </Link>
+                <div className='post-container'>
+                    <Link to={`/post/${post.id}`}><img
+                                src={post.image}
+                                alt={post.title}
+                    /></Link>
+                    <div className='info'>
+                      <p style= {{color: "white"}} >{(post.body).length <= 25 
+                          ? post.body
+                          : `${(post.body).slice(0, 35)}...`}
+                      </p>
+                  </div>
+                </div>
+            
           </li>
         ))}
       </ul>

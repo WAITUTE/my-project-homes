@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Header = ({title,search, setSearch}) => {
   return (
@@ -15,10 +16,16 @@ const Header = ({title,search, setSearch}) => {
             />
         </form>
         <ul>
-            <li >Home</li>
-            <li>Post</li>
-            <li>About</li>
-        </ul>
+        <li>
+          <Link to='/' style= {{color: "white"}}>Home</Link>
+        </li>
+        <li>
+          <Link to='/post' style= {{color: "white"}}>Post</Link>
+        </li>
+        <li>
+          <Link to='/about' style= {{color: "white"}}>About</Link>
+        </li>
+      </ul>
       
     </nav>
   )
