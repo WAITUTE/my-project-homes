@@ -1,15 +1,19 @@
-import React from 'react'
-import { useState } from 'react';
+import React from 'react';
 
-const NewPost = ({handleSubmit, postImage, setPostImage, postTitle, setPostTitle, postBody, setPostBody}) => {
-  const [previewImage, setPreviewImage] = useState('');
 
-  const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    setPostImage(file);
-    setPreviewImage(URL.createObjectURL(file));
+const NewPost = ({handleSubmit,previewImage, setPreviewImage, postImage, setPostImage, postTitle, setPostTitle, postBody, setPostBody}) => {
+  
+ 
+  const handleImageChange = (e) => {
+    const files = e.target.files;
+    const urls = [];
+    for (let i = 0; i < files.length; i++) {
+      urls.push(URL.createObjectURL(files[i]));
+    }
+    setPostImage(files);
+    setPreviewImage(urls);
   };
-
+  
   return (
     <main className='NewPost'>
       <h1>New Post</h1>
@@ -19,6 +23,7 @@ const NewPost = ({handleSubmit, postImage, setPostImage, postTitle, setPostTitle
           id='postTitle'
           type='text'
           required
+          
           value={postTitle}
           onChange={(e) => setPostTitle (e.target.value)}
         />
@@ -27,12 +32,17 @@ const NewPost = ({handleSubmit, postImage, setPostImage, postTitle, setPostTitle
           id='postImage'
           type='file'
           required
+          multiple
           files={postImage}
           onChange={handleImageChange}
         />
-        {previewImage && (
-          <img src={previewImage} alt='Preview' style={{ maxWidth: '100%', marginTop: '10px' }} />
-        )}
+        {previewImage && previewImage.map((url, index) => (
+          <img 
+          key={index} 
+          src={url} 
+          alt={`Preview ${index}`} 
+          style={{ maxWidth: '100%', marginTop: '10px' }} />
+        ))}
         <input
             id='postBody'
             type='text'

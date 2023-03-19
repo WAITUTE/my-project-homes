@@ -12,7 +12,7 @@ const Content = ({ Posts }) => {
             </Link>
                 <div className='post-container'>
                     <Link to={`/post/${post.id}`}><img
-                                src={post.image}
+                                src={post.images[0]}
                                 alt={post.title}
                     /></Link>
                     <div className='info'>

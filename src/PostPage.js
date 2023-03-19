@@ -12,13 +12,17 @@ const PostPage = ({posts, handleDelete}) => {
               <li>
                   <label style= {{color: "white"}}>{post.title}</label>
                   <div className='post-container'>
+                  {post.images.map((image, index) => (
                     <img
-                                    src={post.image}
-                                    alt={post.title}
+                      key={index}
+                      src={image}
+                      alt={image}
+                    
                     />
+                  ))}
                     <div className='info'>
                           <p style= {{color: "white"}}>{post.body} </p>
-                      </div>
+                    </div>
                   </div>
                   <button className='deleteButton' onClick={() => handleDelete(post.id)}>
                     Post Delete
