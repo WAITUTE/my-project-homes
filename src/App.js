@@ -11,43 +11,43 @@ import image2 from './Images/20.jpg';
 import image3 from './Images/30.jpeg'
 import { useState, useEffect} from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
+import api from './api/posts';
 
 function App() {
   
-  const [posts, setPosts] = useState([
-    {
-      id: 1,
-      title: 'My First Post',
-      images: [image1, image2],
-      body:
-        "As an AI language model, I don't have feelings like humans, but I am here to assist you and help you solve your problems. Sometimes, things can be difficult to understand or solve, and it's perfectly normal to ask for help or seek guidance. Don't hesitate to ask questions or reach out for help if you're stuck on something.",
-    },
-    {
-      id: 2,
-      title: 'My Second Post',
-      images: [image2, image1],
-      body:
-        "As an AI language model, I don't have feelings like humans, but I am here to assist you and help you solve your problems. Sometimes, things can be difficult to understand or solve, and it's perfectly normal to ask for help or seek guidance. Don't hesitate to ask questions or reach out for help if you're stuck on something.",
-    },
-    {
-      id: 3,
-      title: 'My Third Post',
-      images: [image3, image2],
-      body:
-        "As an AI language model, I don't have feelings like humans, but I am here to assist you and help you solve your problems. Sometimes, things can be difficult to understand or solve, and it's perfectly normal to ask for help or seek guidance. Don't hesitate to ask questions or reach out for help if you're stuck on something.",
-    },
-  ]);
-  
+const [posts, setPosts] = useState([]);
 const [search, setSearch] = useState('');
 const [searchResults, setSearchResults] = useState([]);
-const [postTitle, setPostTitle] = useState(null);
+const [postTitle, setPostTitle] = useState('');
 const [postBody, setPostBody] = useState('');
+const [editTitle, setEditTitle] = useState('');
+const [editBody, setEditBody] = useState('');
+const [editImage, setEditImage] = useState('')
 const [postImage, setPostImage] = useState([]);
 const [previewImage, setPreviewImage] = useState([]);
 
 
 const navigate = useNavigate();
 
+
+useEffect(() => {
+ const fetchPosts = async () => {
+  try{
+    const response = await api.get('/posts');
+    setPosts(response.data);
+
+  } catch(err){
+    if(err.response){
+      console.log(err.response.data);
+      console.log(err.response.status);
+      console.log(err.response.headers);
+    } else{
+      console.log(`Error: ${err.message}`);
+    }
+  }
+ }
+ fetchPosts();
+},[])
 useEffect(() => {
   const filterResults = posts.filter(post => (
     (post.body).toLowerCase()).includes(search.toLowerCase())
@@ -55,12 +55,17 @@ useEffect(() => {
 
     setSearchResults(filterResults.reverse());
 }, [posts, search]);
-const handleDelete = (id) =>{
+const handleDelete = async (id) =>{
+  try{
+    await api.delete(`/posts/${id}`)
     const postList = posts.filter(post => post.id !== id);
     setPosts(postList);
     navigate('/');
+  }catch(err){
+    console.log(`Error: ${err.message}`);
+  }
 }
-const handleSubmit = (e) => {
+const handleSubmit = async (e) => {
   e.preventDefault();
   const id = posts.length ? posts[posts.length - 1].id + 1 : 1;
   const newPostImages = previewImage;
@@ -70,15 +75,30 @@ const handleSubmit = (e) => {
     images: newPostImages,
     body: postBody,
   };
-  setPosts([...posts, newPost]);
+  try{
+    const response = await api.post('/posts', newPost)
+  setPosts([...posts, response.data]);
   setPostTitle('');
   setPostBody('');
   setPostImage([]);
   setPreviewImage([]);
   navigate('/');
+  } catch(err){
+    console.log(`Error: ${err.message}`);
+  }
 };
-const handleEdit = () => {
-
+const handleEdit = async (id) => {
+  const updatedPost = {id, title: editTitle, images: editImage, body: editBody };
+  try{
+    const response =await api.put(`/posts/${id}`, updatedPost);
+    setPosts(posts.map(post => post.id === id ? {...response.data} : post));
+    setEditBody('');
+    setEditImage('');
+    setEditTitle('');
+    navigate('/');
+  }catch(err){
+    console.log(`Error: ${err.message}`);
+  }
 }
 
   return (
@@ -99,7 +119,18 @@ const handleEdit = () => {
 
                
         />} />
-        <Route path='/edit/:id' element={<EditPost />} />
+        <Route path='/edit/:id' element={<EditPost 
+              editTitle={editTitle} 
+              setEditTitle={setEditTitle}
+              editBody={editBody}
+              setEditBody={setEditBody}
+              handleEdit={handleEdit}
+              editImage = {editImage}
+              setEditImage={setEditImage}
+              previewImage={previewImage}
+              setPreviewImage={setPreviewImage}
+        
+        />} />
         <Route path='/post/:id' element={<PostPage posts={posts} handleDelete={handleDelete}/>} />
         <Route path='/about' element={<About />} />
         <Route path='*' element={<Missing />} />

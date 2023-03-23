@@ -1,0 +1,33 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "My First Post",
+      "images": [
+        "Images/10.jpg",
+        "Images/20.jpg"
+      ],
+      "body": "As an AI language model, I don't have feelings like humans, but I am here to assist you and help you solve your problems. Sometimes, things can be difficult to understand or solve, and it's perfectly normal to ask for help or seek guidance. Don't hesitate to ask questions or reach out for help if you're stuck on something."
+    },
+    {
+      "id": 2,
+      "title": "My Second Post",
+      "images": [
+        "Images/20.jpg",
+        "Images/10.jpg"
+      ],
+      "body": "As an AI language model, I don't have feelings like humans, but I am here to assist you and help you solve your problems. Sometimes, things can be difficult to understand or solve, and it's perfectly normal to ask for help or seek guidance. Don't hesitate to ask questions or reach out for help if you're stuck on something."
+    },
+    {
+      "id": 3,
+      "title": "test.jsS",
+      "images": [
+        "blob:http://localhost:3000/8321f02b-045f-4ea3-8dbd-fcb61f0e9e3b",
+        "blob:http://localhost:3000/1f37d7bd-60eb-4647-b3cb-fa7195784d78",
+        "blob:http://localhost:3000/f8a3b8d2-3e94-41ed-84c2-cb74f0dfdf83",
+        "blob:http://localhost:3000/4193f737-dd01-4631-a760-59999d3cfc89"
+      ],
+      "body": "the great and the strong shall rule the world, the weak shall perish"
+    }
+  ]
+}

@@ -24,6 +24,7 @@ const PostPage = ({posts, handleDelete}) => {
                           <p style= {{color: "white"}}>{post.body} </p>
                     </div>
                   </div>
+                  <Link to={`/edit/${post.id}`}><button className='editButton'>Edit Post</button></Link>
                   <button className='deleteButton' onClick={() => handleDelete(post.id)}>
                     Post Delete
                   </button>

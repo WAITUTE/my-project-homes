@@ -16,6 +16,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   display: flex;
+  
   background-image: url('./Images/80.jpg');
   background-color: #cccccc;
   background-repeat: no-repeat;
